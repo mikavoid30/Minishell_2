@@ -1,0 +1,60 @@
+/*
+** buildins.c for buildins.c in /home/boulat_m/rendu/Projets/minishell
+** 
+** Made by Mickael BOULAT
+** Login   <boulat_m@epitech.net>
+** 
+** Started on  Sat Nov  8 09:29:32 2014 Mickael BOULAT
+** Last update Sun Nov 30 11:56:44 2014 Mickael BOULAT
+*/
+
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <dirent.h>
+#include <signal.h>
+#include "mysh.h"
+#include "my.h"
+
+char	*get_bin_name(char *formated_command)
+{
+  int	i;
+
+  i = 0;
+  while (formated_command[i] != '\0')
+    {
+      if (formated_command[i] == ' ')
+	formated_command[i] = '\0';
+      i++;
+    }
+  return (formated_command);
+}
+
+void	exec_env(t_env_list *start)
+{
+  my_show_list(start);
+}
+
+char    **exec_setenv(char **env, char *var, char *value)
+{
+  int   i;
+
+  i = 0;
+  while (env[i])
+    {
+      if (is_this_var(var, env[i]))
+	my_strcpy(&env[i][my_strlen(var) + 1], my_strcat(value, "\n\0"));
+      i++;
+    }
+  return (env);
+}
+
+char    **exec_addenv(char **env, char *var, char *value)
+{
+  int   i;
+  int	already_exist;
+
+  return env;
+}

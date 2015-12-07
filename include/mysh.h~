@@ -1,0 +1,71 @@
+
+/*
+** mysh.h for mysh in /home/boulat_m/rendu/Projets/minishell/include
+** 
+** Made by Mickael BOULAT
+** Login   <boulat_m@epitech.net>
+** 
+** Started on  Mon Nov  3 09:08:57 2014 Mickael BOULAT
+** Last update Sun Nov 30 10:19:19 2014 Mickael BOULAT
+*/
+
+#ifndef MYSH_H_
+# define MYSH_H_
+#  define BASHRC "~/.bachrc"
+#   define BUFF_SIZE 512
+#   define BLACK "\033[30m"
+#   define RED "\033[31m"
+#   define GREEN "\033[32m"
+#   define YELLOW "\033[33m"
+#   define BLUE "\033[34m"
+#   define MAGENTA "\033[35m"
+#   define CYAN "\033[36m"
+#   define WHITE "\033[37m"
+#   define INIT "\033[0m"
+#   define BOLD "\033[1m"
+
+typedef struct  s_paths
+{
+  char          **paths;
+  int           nb_paths;
+  char		**parsed;
+  char		*buildins;
+}		t_paths;
+
+typedef struct	s_env
+{
+  char	**paths;
+  char	*buildins;
+  int	nb_paths;
+}		t_env;
+
+typedef struct          s_env_list
+{
+  char                  *data;
+  char                  *var;
+  char                  *value;
+  char			**paths;
+  int			nb_paths;
+  char			*buildins;
+  struct s_env_list     *next;
+  struct s_env		*infos;
+}                       t_env_list;
+
+int	minishell(int argc, char **argv, char **env);
+int     get_nb_words(char *line, char separator);
+char    **initt(char **tab, char *line, char separator);
+char    **cut_d(char *line, char **tab, char separator);
+void	*xmalloc(int size);
+DIR     *get_directory(char *directory_name);
+char    get_file_type(unsigned char m);
+char    *check_slash(char *str, char *bin);
+char    *get_ret(char *str1, char *str2, char *ret);
+char	*get_the_path(char *str, t_env_list *the_env, t_paths *p);
+int     is_this_var(char *var, char *str);
+int     get_nb_paths(char *path_line);
+void    my_memset(char *str, int nb);
+void    init_paths(t_env *the_env, char *path_line);
+void    extract_path(char *path_line, t_env *the_env);
+void    my_get_env(char **env, t_env_list **the_env, t_paths *p);
+
+#endif /* MYLS_H_ */
